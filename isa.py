@@ -54,3 +54,30 @@ class ISA:
             self.instructions[inst](arg1, arg2)
         else:
             self.instructions[inst](arg1)
+
+    def load_b(self, arg1, arg2):
+        address = int(self.registers.read(arg2))
+        data = self.memory.read(address)
+        self.registers.write(arg1, data)
+        if data is not None:
+            print(data)
+
+    def store(self, arg1, arg2):
+        data = self.registers.read(arg1)
+        address = int(self.registers.read(arg2))
+        self.memory.write(address, data)
+        if data is not None:
+            print(f" {data}")
+
+    def load_i(self, arg1, arg2):
+        self.registers.write(arg1, arg2)
+
+    def jump(self, arg1):
+        if arg1 == "100":
+            data = self.registers.read('r0')
+            if data is not None:
+                self.output += data
+            else:
+                print("- NO DATA")
+        else:
+            print("Jump address is not recognized.")
