@@ -31,7 +31,7 @@ class ISA:
             print(f"ISA memory: {self.memory.name}")
             start = time()
             with open(file) as code_file:
-                code = code_file.readline()
+                code = code_file.readlines()
                 lines = [line.strip() for line in code if line.strip() != '']
                 for line in lines:
                     self.parse_line(line)
