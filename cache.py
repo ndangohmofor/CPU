@@ -30,7 +30,7 @@ class Cache(Memory):
             entry["data"] = data
         else:
             self.replace_entry(address, data)
-        self.main_memory_write(address, data)
+        self.main_memory.write(address, data)
 
     def read(self, address):
         super().read()
@@ -47,7 +47,7 @@ class Cache(Memory):
     def replace_entry(self, address, data):
         index = 0
         set_number = address % self.sets
-        index = self.fifo_indices(set_number)
+        index = self.fifo_indices[set_number]
         self.data[index] = {"tag": address, "data": data}
 
     def random_policy(self, set_number):
